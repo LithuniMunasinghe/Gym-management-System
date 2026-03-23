@@ -1,0 +1,76 @@
+.data-table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.data-table-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.search-icon {
+  position: absolute; left: 28px;
+  color: var(--muted); pointer-events: none;
+  display: flex; align-items: center;
+}
+.search-input {
+  width: 100%; background: var(--surface2);
+  border: 1px solid var(--border2); border-radius: 8px;
+  padding: 9px 36px; color: var(--text); font-size: .82rem;
+  outline: none; font-family: 'DM Sans', sans-serif;
+  transition: border-color .2s;
+}
+.search-input:focus { border-color: var(--accent); }
+.search-clear {
+  position: absolute; right: 28px;
+  background: none; border: none; color: var(--muted);
+  font-size: .9rem; cursor: pointer;
+}
+.search-clear:hover { color: var(--text); }
+
+.table-container { overflow-x: auto; }
+
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table thead tr { background: var(--surface2); border-bottom: 1px solid var(--border2); }
+.data-table th {
+  padding: 11px 14px; text-align: left;
+  font-size: .65rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--muted); white-space: nowrap;
+}
+.data-table td {
+  padding: 11px 14px; font-size: .82rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text); vertical-align: middle;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr { transition: background .12s; }
+.data-table tbody tr:hover { background: var(--surface2); }
+
+.table-loading, .table-empty {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 48px; gap: 10px;
+  color: var(--muted);
+}
+.spinner {
+  width: 22px; height: 22px;
+  border: 2px solid var(--border2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty-icon { font-size: 2rem; opacity: .4; }
+.empty-text { font-size: .82rem; }
+
+.table-footer {
+  padding: 10px 16px;
+  font-size: .72rem; color: var(--muted);
+  border-top: 1px solid var(--border);
+  background: var(--surface2);
+  text-align: right;
+}

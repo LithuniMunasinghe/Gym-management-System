@@ -1,0 +1,38 @@
+.topbar {
+  height: 64px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background 0.25s, border-color 0.25s;
+}
+.topbar-left { display: flex; flex-direction: column; gap: 1px; }
+.topbar-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: 2px; color: var(--text); font-weight: 400;
+}
+.topbar-date { font-size: 0.7rem; color: var(--muted); }
+.topbar-right { display: flex; align-items: center; gap: 14px; }
+
+.theme-toggle {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  color: var(--muted); display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+.topbar-user { display: flex; align-items: center; gap: 10px; }
+.topbar-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700; flex-shrink: 0;
+}
+.topbar-info { display: flex; flex-direction: column; gap: 1px; }
+.topbar-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.topbar-role { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; }

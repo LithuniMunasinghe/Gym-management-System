@@ -1,0 +1,22 @@
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+.schedule-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  transition: all 0.2s;
+}
+.schedule-card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: 0 8px 24px var(--shadow); }
+.schedule-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 14px; gap: 8px;
+}
+.schedule-card-name { font-size: .9rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.schedule-card-body { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.schedule-meta-row { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--text2); }
+.schedule-meta-icon { font-size: .85rem; flex-shrink: 0; }
+.schedule-card-actions { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid var(--border); }
