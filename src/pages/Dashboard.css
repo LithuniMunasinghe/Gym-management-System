@@ -1,0 +1,6 @@
+/* Dashboard-specific additions beyond global.css */
+.dash-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .85rem; letter-spacing: 3px; color: var(--muted);
+  margin-bottom: 14px; font-weight: 400;
+}

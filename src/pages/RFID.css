@@ -1,0 +1,121 @@
+.rfid-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.rfid-scanner-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.rfid-scanner-icon {
+  width: 80px; height: 80px;
+  background: rgba(232,255,71,.08);
+  border: 1px solid rgba(232,255,71,.18);
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  animation: rfid-pulse 2s ease-in-out infinite;
+}
+@keyframes rfid-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,255,71,.2); }
+  50%       { box-shadow: 0 0 0 12px rgba(232,255,71,.0); }
+}
+
+.rfid-scanner-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--text); }
+.rfid-scanner-sub   { font-size: .8rem; color: var(--muted); max-width: 280px; }
+
+.rfid-input-row { display: flex; gap: 10px; width: 100%; }
+.rfid-input {
+  flex: 1;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.rfid-input:focus { border-color: rgba(232,255,71,.4); }
+.rfid-scan-btn { padding: 13px 22px; border-radius: 10px; font-size: .85rem; }
+
+.rfid-result {
+  width: 100%;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  animation: rfid-in .3s ease-out;
+}
+@keyframes rfid-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.rfid-result--success { background: rgba(71,255,154,.08); border: 1px solid rgba(71,255,154,.2); }
+.rfid-result--error   { background: rgba(255,71,71,.08);  border: 1px solid rgba(255,71,71,.2);  }
+.rfid-result-icon  { font-size: 1.5rem; line-height: 1; }
+.rfid-result-title { font-weight: 600; font-size: .9rem; color: var(--text); }
+.rfid-result-sub   { font-size: .75rem; color: var(--muted); margin-top: 2px; font-family:'Space Mono',monospace; }
+.rfid-result-member{ font-size: .82rem; color: var(--success); margin-top: 4px; }
+
+/* Info panel */
+.rfid-info-panel { display: flex; flex-direction: column; gap: 16px; }
+.rfid-info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+.rfid-info-title { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:2px; color:var(--text); margin-bottom:16px; }
+.rfid-steps { display: flex; flex-direction: column; gap: 16px; }
+.rfid-step {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: .82rem; color: var(--muted);
+}
+.rfid-step strong { display: block; color: var(--text); margin-bottom: 2px; font-size: .85rem; }
+.rfid-step p { margin: 0; }
+.rfid-step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(232,255,71,.12); border: 1px solid rgba(232,255,71,.2);
+  color: var(--accent); font-weight: 700; font-size: .8rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.rfid-tips { padding-left: 18px; display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: .82rem; }
+kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  font-size: .72rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--text);
+}
+
+@media (max-width: 768px) { .rfid-layout { grid-template-columns: 1fr; } }
+
+[data-theme="light"] .rfid-scanner-icon {
+  background: rgba(37,99,235,.06);
+  border-color: rgba(37,99,235,.15);
+}
+[data-theme="light"] .rfid-step-num {
+  background: rgba(37,99,235,.08);
+  border-color: rgba(37,99,235,.15);
+}
+[data-theme="light"] .rfid-input {
+  background: var(--input-bg);
+}
+[data-theme="light"] .rfid-input:focus {
+  border-color: var(--accent);
+}

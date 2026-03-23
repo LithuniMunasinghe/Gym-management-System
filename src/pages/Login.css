@@ -1,0 +1,118 @@
+.login-root {
+  min-height: 100vh; display: flex; position: relative; overflow: hidden;
+  background: var(--bg);
+}
+
+/* Background */
+.login-bg { position: absolute; inset: 0; pointer-events: none; }
+.bg-orb {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.06;
+  animation: orbFloat 10s ease-in-out infinite;
+}
+.bg-orb--1 { width:500px; height:500px; background:var(--accent); top:-100px; left:-100px; animation-delay:0s; }
+.bg-orb--2 { width:400px; height:400px; background:var(--accent3); bottom:-50px; right:-80px; animation-delay:-4s; }
+.bg-orb--3 { width:300px; height:300px; background:var(--success); top:50%; left:40%; animation-delay:-7s; }
+@keyframes orbFloat {
+  0%,100% { transform:translateY(0) scale(1); }
+  50% { transform:translateY(-30px) scale(1.05); }
+}
+.bg-grid {
+  position:absolute; inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+[data-theme="light"] .bg-grid {
+  background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);
+}
+[data-theme="light"] .bg-orb { opacity: 0.08; }
+
+/* Brand panel */
+.login-brand {
+  flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+  padding: 48px; background: linear-gradient(160deg, rgba(232,255,71,.03), transparent);
+  border-right: 1px solid var(--border); position: relative; z-index:1;
+}
+[data-theme="light"] .login-brand { border-right-color: var(--border); }
+@media(max-width:900px){ .login-brand { display:none; } }
+
+.brand-content { flex:1; display:flex; flex-direction:column; justify-content:center; }
+.brand-logo-wrap { margin-bottom:28px; }
+.brand-logo-icon {
+  width:72px; height:72px; background:var(--accent); border-radius:18px;
+  display:flex; align-items:center; justify-content:center; color:#000;
+}
+.brand-name {
+  font-family:'Bebas Neue',sans-serif; font-size:4rem; letter-spacing:6px;
+  color:var(--text); line-height:1; margin-bottom:8px;
+}
+.brand-tagline { font-size:.88rem; color:var(--muted); margin-bottom:36px; }
+.brand-features { display:flex; flex-direction:column; gap:12px; }
+.brand-feature { display:flex; align-items:center; gap:12px; font-size:.85rem; color:var(--text2); }
+.feature-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+
+.brand-bottom { display:flex; align-items:center; gap:0; padding:20px 0 0; border-top:1px solid var(--border); }
+.brand-stat { flex:1; text-align:center; }
+.bs-num { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--accent); letter-spacing:2px; }
+.bs-lbl { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:2px; }
+.brand-stat-div { width:1px; height:40px; background:var(--border); }
+
+/* Login panel */
+.login-panel {
+  width:460px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  padding:40px 48px; position:relative; z-index:1;
+}
+@media(max-width:900px){ .login-panel { width:100%; padding:32px 24px; } }
+
+.login-card { width:100%; }
+.login-card-header { text-align:center; margin-bottom:32px; }
+.login-card-icon {
+  width:60px; height:60px; border-radius:16px; background:var(--surface2);
+  border:1px solid var(--border2); display:flex; align-items:center; justify-content:center;
+  margin:0 auto 16px; color:var(--accent);
+}
+.login-title { font-size:1.6rem; font-weight:700; color:var(--text); margin-bottom:6px; }
+.login-sub { font-size:.82rem; color:var(--muted); }
+
+.login-form { display:flex; flex-direction:column; gap:18px; margin-bottom:24px; }
+.login-field { display:flex; flex-direction:column; gap:6px; }
+.login-label { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; }
+.login-input-wrap { position:relative; display:flex; align-items:center; }
+.login-input-icon { position:absolute; left:14px; color:var(--muted); display:flex; align-items:center; }
+.login-input {
+  width:100%; background:var(--input-bg); border:1px solid var(--border2); border-radius:10px;
+  padding:13px 44px; color:var(--text); font-size:.9rem; outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.login-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(232,255,71,.08); }
+[data-theme="light"] .login-input:focus { box-shadow:0 0 0 3px rgba(37,99,235,.08); }
+.login-eye {
+  position:absolute; right:14px; background:none; border:none;
+  color:var(--muted); display:flex; align-items:center; padding:0;
+}
+.login-eye:hover { color:var(--text); }
+.login-error {
+  background:rgba(255,71,71,.1); border:1px solid rgba(255,71,71,.25); border-radius:8px;
+  padding:10px 14px; font-size:.82rem; color:var(--accent2); display:flex; align-items:center; gap:8px;
+}
+.login-btn {
+  background:var(--accent); color:#000; border:none; border-radius:10px;
+  padding:14px; font-size:.9rem; font-weight:600; display:flex; align-items:center;
+  justify-content:center; gap:10px; transition:all .2s; font-family:'DM Sans',sans-serif;
+}
+[data-theme="light"] .login-btn { color:#fff; background:var(--accent); }
+.login-btn:hover:not(:disabled) { opacity:.88; transform:translateY(-1px); }
+.login-btn:disabled { opacity:.6; cursor:not-allowed; }
+.login-spinner {
+  width:18px; height:18px; border:2px solid rgba(0,0,0,.3); border-top-color:#000;
+  border-radius:50%; animation:spin .7s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+.login-roles { text-align:center; }
+.roles-label { font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; }
+.roles-grid { display:flex; gap:8px; justify-content:center; }
+.role-chip {
+  padding:5px 14px; border-radius:20px; font-size:.72rem; font-weight:500; border:1px solid;
+}
+.role-chip--admin   { background:rgba(232,255,71,.1); color:var(--accent); border-color:rgba(232,255,71,.2); }
+.role-chip--trainer { background:rgba(71,200,255,.1); color:var(--accent3); border-color:rgba(71,200,255,.2); }
+.role-chip--member  { background:rgba(71,255,154,.1); color:var(--success); border-color:rgba(71,255,154,.2); }
