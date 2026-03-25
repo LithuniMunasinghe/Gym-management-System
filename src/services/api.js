@@ -6,6 +6,114 @@ const apiClient = axios.create({
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 });
 
+// --- HARDCODED MOCK ADAPTER STUB ---
+apiClient.defaults.adapter = async (config) => {
+  const { url, method, data } = config;
+  console.log(`[Mock API] ${method.toUpperCase()} ${url}`, data);
+
+  const ok = (dataPayload) => ({
+    data: { StatusCode: 200, Success: true, Message: "Success", Data: dataPayload },
+    status: 200, statusText: 'OK', headers: {}, config
+  });
+
+  // Auth
+  if (url === '/User/Login') {
+    let email = '';
+    if (typeof data === 'string') {
+      const params = new URLSearchParams(data);
+      email = (params.get('email') || '').toLowerCase();
+    }
+    
+    if (email.includes('trainer')) {
+      return ok({ userId: 2, username: 'trainer1', email: email, phone: '0987654321', roleId: 2 }); // Role 2 = Trainer
+    }
+    if (email.includes('member') || email.includes('user')) {
+      return ok({ userId: 3, username: 'member1', email: email, phone: '1112223333', roleId: 3 }); // Role 3 = Member
+    }
+    
+    return ok({ userId: 1, username: 'admin', email: email || 'admin@gym.com', phone: '1234567890', roleId: 1 }); // Role 1 = Admin
+  }
+
+  // Users
+  if (url.includes('/User/GetAllUsers')) return ok([
+    { userId: 1, username: 'admin', email: 'admin@gym.com', roleId: 1, phone: '1234567890' },
+    { userId: 2, username: 'trainer1', email: 'trainer1@gym.com', roleId: 3, phone: '0987654321' },
+    { userId: 3, username: 'member1', email: 'member1@gym.com', roleId: 2, phone: '1112223333' }
+  ]);
+
+  // Members
+  if (url.includes('/Member/GetAllMembers')) return ok([
+    { memberId: 1, userId: 3, firstName: 'John', lastName: 'Doe', nic: '123456789V', dob: '1990-01-01', gender: 'Male', address: '123 Main St', emergencyContact: '9998887777', joinDate: '2023-01-01', status: 'Active' }
+  ]);
+
+  // Trainers
+  if (url.includes('/Trainer/GetAllTrainer')) return ok([
+    { trainerId: 1, userId: 2, firstName: 'Jane', lastName: 'Smith', specialization: 'Weightlifting', experienceYears: 5, hireDate: '2022-01-01', status: 'Active' }
+  ]);
+
+  // Plans
+  if (url.includes('/Plan/GetAllPlans')) return ok([
+    { planId: 1, planName: 'Basic Monthly', durationDays: 30, amount: 5000, description: 'Access to gym equipment' },
+    { planId: 2, planName: 'Premium Annual', durationDays: 365, amount: 50000, description: 'All access + personal training' }
+  ]);
+
+  // Subscriptions
+  if (url.includes('/Subscription/GetAll') || url.includes('/Subscription/GetSubscriptionById')) return ok([
+    { subscriptionId: 1, memberId: 1, planId: 1, startDate: '2023-10-01', endDate: '2023-10-31', status: 'Active', amount: 5000 }
+  ]);
+
+  // Payments
+  if (url.includes('/Payment/Index') || url.includes('/Payment/GetBySubscription')) return ok([
+    { paymentId: 1, memberId: 1, amount: 5000, paymentDate: '2023-10-01', status: 'Completed', paymentMethod: 'Card' }
+  ]);
+
+  // Schedules
+  if (url.includes('/Schedul/Index') || url.includes('/Schedul/GetByTrainer') || url.includes('/Schedul/GetByMember')) return ok([
+    { scheduleId: 1, memberId: 1, trainerId: 1, date: '2023-10-15', timeSlot: '10:00 AM - 11:00 AM', status: 'Scheduled' }
+  ]);
+
+  // Trainer Assignments
+  if (url.includes('/TrainerAssignment/Index') || url.includes('/TrainerAssignment/GetByTrainer') || url.includes('/TrainerAssignment/MyTrainer')) return ok([
+    { assignmentId: 1, memberId: 1, trainerId: 1, assignDate: '2023-10-01', status: 'Active' }
+  ]);
+
+  // Timeslots
+  if (url.includes('/TimeSlot/GetAll') || url.includes('/TrainerTimeSlot/GetAll') || url.includes('/TimeSlot/GetTrainerSlots') || url.includes('/TrainerTimeSlot/GetByTrainer')) return ok([
+    { id: 1, trainerId: 1, startTime: '08:00', endTime: '10:00', dayOfWeek: 'Monday', isActive: true },
+    { id: 2, trainerId: 1, startTime: '10:00', endTime: '12:00', dayOfWeek: 'Tuesday', isActive: true }
+  ]);
+
+  // Exercises
+  if (url.includes('/NonEquipmentExercise/GetAll') || url.includes('/Exercise/GetAll') || url.includes('/WorkoutSessionExercise')) return ok([
+    { exerciseId: 1, exerciseName: 'Pushups', category: 'Chest', description: 'Bodyweight exercise', reps: 10, sets: 3 },
+    { exerciseId: 2, exerciseName: 'Squats', category: 'Legs', description: 'Bodyweight exercise', reps: 15, sets: 3 }
+  ]);
+
+  // Equipment & Usage
+  if (url.includes('/Equipment/GetAll')) return ok([
+    { equipmentId: 1, equipmentName: 'Treadmill', category: 'Cardio', status: 'Available', purchaseDate: '2020-01-01' },
+    { equipmentId: 2, equipmentName: 'Dumbbells', category: 'Weights', status: 'Available', purchaseDate: '2020-01-01' }
+  ]);
+  if (url.includes('/EquipmentUsageLog') || url.includes('/EquipmentAssignment')) return ok([]);
+
+  // Roles
+  if (url.includes('/Role/GetAllRole')) return ok([
+    { roleId: 1, roleName: 'Admin' },
+    { roleId: 2, roleName: 'Member' },
+    { roleId: 3, roleName: 'Trainer' }
+  ]);
+
+  // Attendance
+  if (url.includes('/Attendance/GetAll') || url.includes('/Attendance/GetMemberAttendance')) return ok([
+    { attendanceId: 1, memberId: 1, scanTime: '2023-10-10 08:00', status: 'In' }
+  ]);
+
+  // Default Fallback
+  return ok({ id: 1, result: "mocked" });
+};
+// ----------------------------------------
+
+
 // Attach auth token
 apiClient.interceptors.request.use((config) => {
   const user = localStorage.getItem('dts_gym_user');
